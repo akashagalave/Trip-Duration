@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/akash/OneDrive/Desktop/Internship/Trip-Duration/mlruns/0/b3baa558871244a5a73c0af12082589e/artifacts
+end_time: 1742160182167
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: b3baa558871244a5a73c0af12082589e
+run_name: XGB Final Model
+run_uuid: b3baa558871244a5a73c0af12082589e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742160164905
+status: 3
+tags: []
+user_id: akash

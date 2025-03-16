@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/akash/OneDrive/Desktop/Internship/Trip-Duration/mlruns/0/9e190dd21d2045d7be62de0d4e6c303f/artifacts
+end_time: 1742160164859
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9e190dd21d2045d7be62de0d4e6c303f
+run_name: XGBRegressor
+run_uuid: 9e190dd21d2045d7be62de0d4e6c303f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742160150937
+status: 3
+tags: []
+user_id: akash

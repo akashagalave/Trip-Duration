@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1742164340841
+current_stage: None
+description: ''
+last_updated_timestamp: 1742164340841
+name: XGB Final Model
+run_id: b3baa558871244a5a73c0af12082589e
+run_link: ''
+source: file:///C:/Users/akash/OneDrive/Desktop/Internship/Trip-Duration/mlruns/0/b3baa558871244a5a73c0af12082589e/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///C:/Users/akash/OneDrive/Desktop/Internship/Trip-Duration/mlruns/0/b3baa558871244a5a73c0af12082589e/artifacts/model
+user_id: null
+version: 1
