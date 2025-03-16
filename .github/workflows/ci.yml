@@ -60,7 +60,12 @@ jobs:
     runs-on: self-hosted
     needs: build-and-push-ecr-image
     steps:
-      - name: Install Docker on Self-Hosted Runner
+      - name: Fix Docker Permissions
+        run: |
+          sudo chown $USER:docker /var/run/docker.sock
+          sudo chmod 666 /var/run/docker.sock
+
+      - name: Install Docker (if not installed)
         run: |
           if ! command -v docker &> /dev/null
           then
@@ -86,7 +91,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Pull latest images
+      - name: Pull latest Docker image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
@@ -96,12 +101,19 @@ jobs:
 
       - name: Delete Previous Container
         run: |
-          docker rm -f trip-duration || true
+          CONTAINER_ID=$(docker ps -aq --filter "name=trip-duration")
+          if [ ! -z "$CONTAINER_ID" ]; then
+            echo "Stopping and removing previous container..."
+            docker stop $CONTAINER_ID
+            docker rm $CONTAINER_ID
+          else
+            echo "No existing container found."
+          fi
 
-      - name: Run Docker Image to Serve Users
+      - name: Run Docker Container
         run: |
           docker run -d -p 8080:8080 --ipc="host" --name=trip-duration \
           -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' \
           -e 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}' \
           -e 'AWS_REGION=${{ secrets.AWS_REGION }}' \
-          ${{ secrets.AWS_ECR_LOGIN_URI }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+          ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
