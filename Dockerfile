@@ -6,7 +6,8 @@ WORKDIR /app
 
 # Copy the required files and directory into the container at /app
 COPY service.py /app/service.py
-COPY model.joblib /app/model/model.joblib  # Ensure model is inside /app/model/
+RUN mkdir -p /app/model  # Create the "model" directory before copying
+COPY model.joblib /app/model/model.joblib
 COPY src/ /app/src/
 COPY requirements.txt /app/requirements.txt
 
